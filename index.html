@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitor de Liquidez | Terminal</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="header">
+        <h1>MONITOR DE LIQUIDEZ Y ESTRUCTURA</h1>
+        <p>Sistema de Análisis Multi-Temporal</p>
+    </div>
+
+    <div class="controls">
+        <input type="text" id="searchInput" class="search-box" placeholder="BUSCAR ACTIVO...">
+        <div class="filter-btns">
+            <button class="btn-filter active" onclick="filterAssets('all', event)">TODOS</button>
+            <button class="btn-filter" onclick="filterAssets('verde', event)">ALZA</button>
+            <button class="btn-filter" onclick="filterAssets('rojo', event)">BAJA</button>
+        </div>
+    </div>
+
+    <div class="list-container">
+        <div class="list-header">
+            <div class="col-asset">ACTIVO</div>
+            <div class="col-timeframes">TEMPORALIDADES (M / W / D / 4H / 1H)</div>
+            <div class="col-direction">DIRECCIÓN</div>
+        </div>
+        
+        <div id="marketBody">
+            <!-- JS insertará las filas aquí -->
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

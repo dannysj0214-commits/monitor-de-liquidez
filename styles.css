@@ -1,0 +1,207 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&family=Inter:wght@400;600&display=swap');
+
+:root {
+    --bg-base: #000000;        
+    --bg-surface: #0a0a0a;     
+    --bg-row-hover: #141414;   
+    --bg-cell: #111111;        
+    
+    --text-main: #d1d4dc;
+    --text-muted: #5d606b;
+    --border-color: #2a2e39;
+
+    --color-up: #00a86b;       
+    --color-down: #e02b2b;     
+    --color-neutral: #5d606b;  
+
+    --tf-mensual: #9b59b6;
+    --tf-semanal: #3498db;
+    --tf-diaria: #95a5a6;
+    --tf-4h: #e67e22;
+    --tf-1h: #2ecc71;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-base);
+    color: var(--text-main);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.header { text-align: center; margin-bottom: 30px; border-bottom: 1px solid var(--border-color); padding-bottom: 15px; width: 100%; max-width: 1250px;}
+.header h1 { 
+    color: #ffffff; 
+    margin: 0 0 5px 0; 
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-size: 1.4rem;
+}
+.header p { color: var(--text-muted); font-size: 0.8rem; margin: 0; font-family: 'Roboto Mono', monospace; text-transform: uppercase;}
+
+.controls {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 1250px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.search-box {
+    padding: 10px 15px;
+    border-radius: 0; 
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-surface);
+    color: #fff;
+    width: 300px;
+    outline: none;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.85rem;
+}
+.search-box:focus { border-color: var(--text-muted); }
+
+.filter-btns { display: flex; gap: 0; }
+.btn-filter {
+    padding: 10px 20px;
+    border: 1px solid var(--border-color);
+    border-left: none;
+    background-color: var(--bg-surface);
+    color: var(--text-muted);
+    cursor: pointer;
+    font-weight: 500;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.8rem;
+    transition: all 0.2s;
+}
+.btn-filter:first-child { border-left: 1px solid var(--border-color); }
+.btn-filter:hover { background-color: var(--bg-row-hover); color: #fff; }
+.btn-filter.active { background-color: #222; color: #fff; }
+
+.list-container {
+    width: 100%;
+    max-width: 1250px;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 4px; 
+    overflow-x: auto;
+}
+
+/* Ajuste de columnas: Activo (150px), Temporalidades (1fr), Dirección (250px) */
+.list-header {
+    display: grid;
+    grid-template-columns: 150px 1fr 250px;
+    align-items: center;
+    padding: 12px 20px;
+    background-color: var(--bg-cell);
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 700;
+}
+
+.asset-row {
+    display: grid;
+    grid-template-columns: 150px 1fr 250px;
+    align-items: center;
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--border-color);
+    transition: background 0.1s;
+}
+.asset-row:hover { background-color: var(--bg-row-hover); }
+.asset-row:last-child { border-bottom: none; }
+
+.col-asset { 
+    font-weight: 700; 
+    color: #ffffff; 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    font-size: 0.95rem;
+    font-family: 'Roboto Mono', monospace;
+}
+
+.semaforo {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+}
+.semaforo.verde { background-color: var(--color-up); }
+.semaforo.rojo { background-color: var(--color-down); }
+.semaforo.amarillo { background-color: #f1c40f; }
+
+/* Botones de Temporalidad */
+.col-timeframes { display: flex; gap: 6px; justify-content: flex-start; }
+
+.tf-btn {
+    background-color: var(--bg-base);
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    padding: 6px 12px;
+    border-radius: 2px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.1s;
+    font-family: 'Roboto Mono', monospace;
+    position: relative;
+    min-width: 40px;
+    text-align: center;
+}
+
+.tf-btn[data-tf="monthly"] { border-top: 2px solid var(--tf-mensual); }
+.tf-btn[data-tf="weekly"] { border-top: 2px solid var(--tf-semanal); }
+.tf-btn[data-tf="daily"] { border-top: 2px solid var(--tf-diaria); }
+.tf-btn[data-tf="h4"] { border-top: 2px solid var(--tf-4h); }
+.tf-btn[data-tf="h1"] { border-top: 2px solid var(--tf-1h); }
+
+.tf-btn:hover { border-color: #555; color: #fff; }
+
+.tf-btn.active-up { background-color: var(--color-up); color: #000; border-color: var(--color-up); }
+.tf-btn.active-down { background-color: var(--color-down); color: #fff; border-color: var(--color-down); }
+.tf-btn.active-neutral { background-color: #222; color: #aaa; border-color: #444; }
+
+/* Botones de Dirección */
+.col-direction { display: flex; gap: 6px; justify-content: flex-end; }
+
+.dir-btn {
+    background-color: var(--bg-base);
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    padding: 6px 15px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.1s;
+    font-size: 0.75rem;
+    font-weight: 700;
+    font-family: 'Roboto Mono', monospace;
+    width: 75px;
+}
+.dir-btn:hover { border-color: #555; color: #fff; }
+
+.dir-btn.active-up { background-color: var(--color-up); color: #000; border-color: var(--color-up); }
+.dir-btn.active-down { background-color: var(--color-down); color: #fff; border-color: var(--color-down); }
+.dir-btn.active-neutral { background-color: #222; color: #fff; border-color: #444; }
+
+/* Responsive */
+@media (max-width: 1000px) {
+    .list-header { display: none; }
+    .asset-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 15px;
+        border-bottom: 2px solid var(--border-color);
+    }
+    .col-asset { border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
+    .col-timeframes { justify-content: flex-start; flex-wrap: wrap; }
+    .col-direction { justify-content: flex-start; }
+}
