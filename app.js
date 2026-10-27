@@ -1,38 +1,53 @@
-// Base de datos con la nueva variable 'direccion' independiente
-let marketData = [
-    { id: "EURUSD", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
-    { id: "USDCAD", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
-    { id: "GBPUSD", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
-    { id: "AUDUSD", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
-    { id: "EURAUD", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
-    { id: "EURCAD", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
-    { id: "EURJPY", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
-    { id: "EURGBP", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
-    { id: "EURNZD", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
-    { id: "AUDJPY", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
-    { id: "USDJPY", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
-    { id: "CADJPY", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
-    { id: "CADCHF", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
-    { id: "GBPAUD", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
-    { id: "AUDNZD", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
-    { id: "GBPCAD", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
-    { id: "GBPJPY", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
-    { id: "GBPNZD", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
-    { id: "NZDCAD", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
-    { id: "NZDJPY", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
-    { id: "NZDUSD", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
-    { id: "AUDCAD", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
-    { id: "AUDCHF", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
-    { id: "USDCHF", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
-    { id: "CHFJPY", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
-    { id: "EURCHF", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
-    { id: "GBPCHF", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
-    { id: "NZDCHF", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" }
-];
+// 1. FUNCIÓN PARA CARGAR LOS DATOS GUARDADOS
+function cargarDatos() {
+    const datosGuardados = localStorage.getItem("monitorLiquidezData");
+    if (datosGuardados) {
+        return JSON.parse(datosGuardados);
+    }
+    
+    // Si es la primera vez que entras, carga la lista por defecto
+    return [
+        { id: "EURUSD", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
+        { id: "USDCAD", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
+        { id: "GBPUSD", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
+        { id: "AUDUSD", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
+        { id: "EURAUD", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
+        { id: "EURCAD", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
+        { id: "EURJPY", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
+        { id: "EURGBP", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
+        { id: "EURNZD", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
+        { id: "AUDJPY", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
+        { id: "USDJPY", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
+        { id: "CADJPY", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
+        { id: "CADCHF", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
+        { id: "GBPAUD", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
+        { id: "AUDNZD", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
+        { id: "GBPCAD", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
+        { id: "GBPJPY", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
+        { id: "GBPNZD", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
+        { id: "NZDCAD", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
+        { id: "NZDJPY", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
+        { id: "NZDUSD", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
+        { id: "AUDCAD", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
+        { id: "AUDCHF", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
+        { id: "USDCHF", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
+        { id: "CHFJPY", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
+        { id: "EURCHF", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
+        { id: "GBPCHF", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" },
+        { id: "NZDCHF", monthly: "neutral", weekly: "neutral", daily: "neutral", h4: "neutral", h1: "neutral", direccion: "neutral" }
+    ];
+}
+
+// 2. INICIALIZAMOS LOS DATOS
+let marketData = cargarDatos();
+
+// 3. FUNCIÓN PARA GUARDAR LOS DATOS
+function guardarDatos() {
+    localStorage.setItem("monitorLiquidezData", JSON.stringify(marketData));
+}
 
 let currentFilter = "all";
 
-// El semáforo ahora usará la 'direccion' en lugar de la temporalidad h1
 function calculateTrafficLight(asset) {
     if (asset.direccion === "up") return "verde";
     if (asset.direccion === "down") return "rojo";
@@ -52,7 +67,6 @@ function renderTable(filterText = "", filterType = "all") {
     filteredData.forEach((asset) => {
         const trafficLight = calculateTrafficLight(asset);
 
-        // Renderiza los botones de temporalidades (M, W, D, 4H, 1H)
         const renderTfButton = (key, label) => {
             const state = asset[key];
             let btnClass = `tf-btn`;
@@ -64,12 +78,10 @@ function renderTable(filterText = "", filterType = "all") {
             return `<button class="${btnClass}" data-tf="${key}" onclick="rotateState('${asset.id}', '${key}')">${label}</button>`;
         };
 
-        // Renderiza los botones de la dirección final (usando la variable 'direccion')
         const renderDirButton = (stateType, label) => {
             const isActive = asset.direccion === stateType;
             let btnClass = `dir-btn`;
             if (isActive) btnClass += ` active-${stateType}`;
-            // Función setDireccion en lugar de setState
             return `<button class="${btnClass}" onclick="setDireccion('${asset.id}', '${stateType}')">${label}</button>`;
         };
 
@@ -100,7 +112,6 @@ function renderTable(filterText = "", filterType = "all") {
     });
 }
 
-// Función para las temporalidades (M, W, D, 4H, 1H)
 function rotateState(assetId, timeframe) {
     const asset = marketData.find(a => a.id === assetId);
     if (asset) {
@@ -108,16 +119,18 @@ function rotateState(assetId, timeframe) {
         else if (asset[timeframe] === "neutral") asset[timeframe] = "down";
         else asset[timeframe] = "up";
 
+        guardarDatos(); // GUARDA EN LOCALSTORAGE
         const searchText = document.getElementById("searchInput").value;
         renderTable(searchText, currentFilter);
     }
 }
 
-// NUEVA Función exclusiva para la Dirección Final
 function setDireccion(assetId, state) {
     const asset = marketData.find(a => a.id === assetId);
     if (asset) {
-        asset.direccion = state; // Guarda en 'direccion', no en 'h1'
+        asset.direccion = state;
+        
+        guardarDatos(); // GUARDA EN LOCALSTORAGE
         const searchText = document.getElementById("searchInput").value;
         renderTable(searchText, currentFilter);
     }
